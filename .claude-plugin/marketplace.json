@@ -1,0 +1,14 @@
+{
+  "name": "jawad-plugins",
+  "owner": { "name": "Muhammad Jawad Hassan", "url": "https://github.com/jawad606" },
+  "metadata": { "description": "Engineering workflow plugins by Jawad Hassan", "version": "0.1.0" },
+  "plugins": [
+    {
+      "name": "ship-standards",
+      "source": "./plugins/ship-standards",
+      "description": "Spec → Context → Build → Test → Evaluate → Deploy workflow for agentic coding, for new and existing repos",
+      "version": "0.1.0",
+      "category": "development"
+    }
+  ]
+}

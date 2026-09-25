@@ -1,0 +1,21 @@
+{
+  "description": "ship-standards: load workflow context at session start; remind about the decision log before finishing a coding task",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          { "type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/session-start.sh\"", "timeout": 10 }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          { "type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/stop-check.sh\"", "timeout": 15 }
+        ]
+      }
+    ]
+  }
+}
