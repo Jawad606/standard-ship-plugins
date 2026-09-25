@@ -1,4 +1,4 @@
-# jawad-plugins
+# Ship-Standards
 
 Plugin marketplace by [Muhammad Jawad Hassan](https://jawadhassan.dev). The plugins work in
 Claude Code, and their skills also work in Cursor, GitHub Copilot, Codex, Antigravity, Gemini CLI,
