@@ -120,7 +120,23 @@ the reviewer should check.>
 2. ...
 ```
 
-## Step 4 — Q&A mode
+## Step 4 — PR body
+
+When the user asks to open a PR, or runs `/merge-critique pr`:
+
+1. Fill `.github/pull_request_template.md` from the report (keep the template's headings
+   in order; the report has more detail than the PR needs, so condense). If the repo has no
+   template, use the report's Summary, Key decisions, Risks, and Testing sections.
+2. Save it as `.decisions/<branch-slug>-pr.md`.
+3. Show the user the title and body, then ask before pushing or creating anything. On a yes:
+   `git push -u origin <branch>` if the branch isn't pushed yet, then
+   `gh pr create --base <baseBranch> --title "<title>" --body-file .decisions/<branch-slug>-pr.md`.
+4. If a PR already exists for the branch (`gh pr view`), offer
+   `gh pr edit --body-file ...` instead of creating a new one.
+5. If `gh` isn't installed or authenticated, say so and tell the user to paste the file's
+   contents into the PR on GitHub.
+
+## Step 5 — Q&A mode
 
 After the report, the reviewer may ask follow-ups ("why not put this in the controller?",
 "is this safe under concurrent requests?"). Answer each one with the same evidence rule:

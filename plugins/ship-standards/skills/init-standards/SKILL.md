@@ -70,15 +70,20 @@ Always (both modes):
 3. **`specs/README.md`** and **`specs/000-template.md`** (copy from the `spec` skill's
    `references/spec-template.md`).
 4. **`.decisions/.gitkeep`**.
+5. **PR template**: `.github/pull_request_template.md` from `references/pull_request_template.md`.
+   GitHub fills every new PR body with it automatically (web UI and interactive `gh pr create`).
+   If the repo already has a template (`.github/pull_request_template.md`,
+   `.github/PULL_REQUEST_TEMPLATE/`, or `docs/`), don't overwrite it: show a merged version
+   that keeps the team's sections and adds the missing ones, and apply it only on a yes.
 
 Only if the user agreed:
 
-5. **CI** — adapt `references/ci-workflow.yml` to the detected commands and package manager.
+6. **CI** — adapt `references/ci-workflow.yml` to the detected commands and package manager.
    In existing repos with CI, propose a diff to the current workflow instead of a new file.
-6. **Missing test tooling** — New mode defaults: Vitest (TS libs/Next.js), Jest (NestJS default),
+7. **Missing test tooling** — New mode defaults: Vitest (TS libs/Next.js), Jest (NestJS default),
    Pytest (Python), Playwright (e2e). Existing mode: fill gaps with whatever the repo already
    uses; don't add Vitest to a Jest repo.
-7. **Graphify** — suggest `uv tool install graphifyy && graphify claude install --project`
+8. **Graphify** — suggest `uv tool install graphifyy && graphify claude install --project`
    and run `/graphify .` once the codebase has meaningful size.
 
 ## Step 5 — New mode extras

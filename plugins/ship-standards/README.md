@@ -14,7 +14,8 @@ It works in **existing** codebases (it reads and respects their conventions) and
 | Skill | `spec` | Writes `specs/NNN-feature.md` with testable acceptance criteria (`AC-1`…). |
 | Skill | `engineering-standards` | Default build, testing, security and AI-feature rules. Repo conventions override them. |
 | Skill | `verify` | Runs lint → typecheck → test → e2e → build from the config and maps tests to ACs. |
-| Skill | `merge-critique` | Evidence-backed report for whoever merges: why each file and decision, risks, what's untested. |
+| Skill | `merge-critique` | Evidence-backed report for whoever merges: why each file and decision, risks, what's untested. `/merge-critique pr` fills the PR template and opens the PR with `gh` (after you confirm). |
+| Template | `.github/pull_request_template.md` | Added by `/init-standards`. GitHub pre-fills every new PR with it. |
 | Agent | `critique-reviewer` | Fresh-context, read-only reviewer used by merge-critique. |
 | Hook | SessionStart | Loads branch, decision-log path and active specs; nudges `/init-standards` in uninitialised repos. |
 | Hook | Stop | If source changed on a feature branch with no decision log, asks Claude once to record decisions and verify. |
@@ -33,7 +34,8 @@ Then, in any repo:
 /spec <feature>          # before building
 ... build ...
 /verify                  # before calling it done
-/merge-critique          # before merge / as PR description
+/merge-critique          # reviewer report
+/merge-critique pr       # fill the PR template and open the PR
 ```
 
 ## Configuration — `.ship-standards.json`

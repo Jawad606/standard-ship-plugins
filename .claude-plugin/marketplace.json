@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Engineering workflow plugins by Jawad Hassan",
-    "version": "0.2.0"
+    "version": "0.3.0"
   },
   "plugins": [
     {
       "name": "ship-standards",
       "source": "./plugins/ship-standards",
       "description": "Spec → Context → Build → Test → Evaluate → Deploy workflow for agentic coding, for new and existing repos",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "category": "development"
     }
   ]
