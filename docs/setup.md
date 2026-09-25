@@ -8,7 +8,7 @@ ship-standards is built as a Claude Code plugin, but its core is plain [Agent Sk
 | Skills | `init-standards`, `spec`, `engineering-standards`, `verify`, `merge-critique` | Yes: every tool below |
 | Agent | `critique-reviewer` (read-only reviewer) | Some tools; `merge-critique` works without it |
 | Hooks | SessionStart (context) + Stop (decision-log reminder) | Varies; optional |
-| Instructions | Workflow block `/init-standards` writes to `CLAUDE.md` | Every tool, via `AGENTS.md` if needed |
+| Instructions | Workflow block `/init-standards` writes to `AGENTS.md` (`CLAUDE.md` imports it) | Every tool; Gemini CLI needs one setting |
 
 **Only the skills are required.** The hooks and the agent are optional extras: the workflow
 still runs without them.
@@ -123,8 +123,7 @@ choose one automatically.
 add `readonly: true` to the frontmatter.
 [Docs](https://cursor.com/docs/subagents)
 
-**Instructions:** Cursor reads `AGENTS.md` and `.cursor/rules/*.mdc`, but not `CLAUDE.md`.
-See [After install](#after-install-every-tool).
+**Instructions:** Cursor reads `AGENTS.md`, so the workflow block loads with nothing extra to set.
 [Docs](https://cursor.com/docs/context/rules)
 
 **Hooks:** Cursor imports Claude hooks from `.claude/settings.json` when
@@ -173,8 +172,7 @@ from Git repo*.
 - **Agent:** copy it to `.github/agents/` or `.claude/agents/`. Copilot's tool names differ
   from Claude's, so delete the `tools:` line if the agent fails to load.
   [Docs](https://code.visualstudio.com/docs/copilot/customization/custom-agents)
-- **Instructions:** Copilot reads `AGENTS.md` and `.github/copilot-instructions.md`. To have it
-  read `CLAUDE.md`, enable `chat.useClaudeMdFile`.
+- **Instructions:** Copilot reads `AGENTS.md`, so the workflow block loads with nothing extra to set.
 - **Hooks:** enable `chat.useClaudeHooks` and use the same `.claude/settings.json` block shown
   in the [Cursor](#cursor) section.
   [Docs](https://code.visualstudio.com/docs/copilot/customization/hooks)
@@ -190,13 +188,7 @@ Codex supports skills and the hooks. The agent has to be converted to TOML.
 on, through `/skills`, or let Codex pick one automatically.
 [Docs](https://learn.chatgpt.com/docs/build-skills)
 
-**Instructions:** Codex reads `AGENTS.md`. To make it read `CLAUDE.md` as well, add this to
-`~/.codex/config.toml`:
-
-```toml
-project_doc_fallback_filenames = ["CLAUDE.md"]
-```
-
+**Instructions:** Codex reads `AGENTS.md`, so the workflow block loads with nothing extra to set.
 [Docs](https://learn.chatgpt.com/docs/agent-configuration/agents-md)
 
 **Agent:** Codex subagents are TOML files. Create `.codex/agents/critique-reviewer.toml` and
@@ -246,8 +238,7 @@ to `.agents/skills/` in the workspace, or globally to `~/.gemini/config/skills/`
 `/spec` or let Antigravity pick one.
 [Docs](https://antigravity.google/docs/skills)
 
-**Instructions:** Antigravity reads `AGENTS.md`, `GEMINI.md` and `.agents/rules/*.md`, but not
-`CLAUDE.md`.
+**Instructions:** Antigravity reads `AGENTS.md`, so the workflow block loads with nothing extra to set.
 [Docs](https://antigravity.google/docs/rules)
 
 **Agent:** copy it to `.agents/agents/critique-reviewer.md`, then edit the frontmatter:
@@ -295,11 +286,11 @@ projects. Gemini activates skills automatically and asks for consent first; mana
 `/skills list`.
 [Docs](https://geminicli.com/docs/cli/skills/)
 
-**Instructions:** Gemini reads `GEMINI.md` by default. To add the other files, set this in
-`.gemini/settings.json`:
+**Instructions:** Gemini reads only `GEMINI.md` by default. To load the workflow block, add
+`AGENTS.md` in `.gemini/settings.json`:
 
 ```json
-{ "context": { "fileName": ["AGENTS.md", "CLAUDE.md", "GEMINI.md"] } }
+{ "context": { "fileName": ["AGENTS.md", "GEMINI.md"] } }
 ```
 
 [Docs](https://geminicli.com/docs/cli/gemini-md/)
@@ -338,8 +329,7 @@ name ("use the spec skill for …"). If you want `/spec` as a slash command, add
 under `.opencode/commands/`.
 [Docs](https://opencode.ai/docs/skills)
 
-**Instructions:** OpenCode reads `AGENTS.md` and falls back to `CLAUDE.md`, so nothing extra is
-needed.
+**Instructions:** OpenCode reads `AGENTS.md`, so the workflow block loads with nothing extra to set.
 [Docs](https://opencode.ai/docs/rules)
 
 **Agent:** copy it to `.opencode/agents/critique-reviewer.md` and edit the frontmatter:
@@ -350,7 +340,7 @@ Invoke it with `@critique-reviewer`.
 [Docs](https://opencode.ai/docs/agents)
 
 **Hooks:** OpenCode has no shell-hook config, only JS/TS plugins. Skip the hooks; the workflow
-block in `AGENTS.md`/`CLAUDE.md` still tells the agent to log decisions and run `/verify`.
+block in `AGENTS.md` still tells the agent to log decisions and run `/verify`.
 [Docs](https://opencode.ai/docs/plugins)
 
 ---
@@ -367,7 +357,7 @@ config is enabled. Invoke a skill with `@spec` (Cascade doesn't use slash for sk
 choose.
 [Docs](https://docs.devin.ai/desktop/cascade/skills)
 
-**Instructions:** Cascade reads `AGENTS.md` and `.devin/rules/*.md`.
+**Instructions:** Cascade reads `AGENTS.md`, so the workflow block loads with nothing extra to set.
 [Docs](https://docs.devin.ai/desktop/cascade/agents-md)
 
 **Agent and hooks:** not supported. `merge-critique` runs its review inline when the agent is
@@ -385,7 +375,7 @@ you use `npx skills`. Invoke with `/spec` or let Cline choose. You can toggle sk
 Skills panel.
 [Docs](https://docs.cline.bot/customization/skills.md)
 
-**Instructions:** Cline reads `AGENTS.md` and `.clinerules/`.
+**Instructions:** Cline reads `AGENTS.md`, so the workflow block loads with nothing extra to set.
 [Docs](https://docs.cline.bot/customization/cline-rules.md)
 
 **Agent and hooks:** not supported in the VS Code extension. `merge-critique` falls back to an
@@ -396,13 +386,10 @@ inline review.
 ## After install: every tool
 
 1. **Initialise each repo once:** run `/init-standards` (or ask for "the init-standards
-   skill"). It writes `.ship-standards.json`, a workflow block in `CLAUDE.md`, `specs/` and
-   `.decisions/`.
-2. **Tools that don't read `CLAUDE.md`** (Cursor, Antigravity, Windsurf, Cline, and Codex
-   without the fallback setting) need the workflow block in `AGENTS.md`. Either:
-   - ask the agent to "copy the `ship-standards` block from CLAUDE.md into AGENTS.md", or
-   - symlink the file: `ln -s CLAUDE.md AGENTS.md`. On Windows, run
-     `mklink AGENTS.md CLAUDE.md` in cmd with Developer Mode on.
+   skill"). It writes `.ship-standards.json`, the workflow block in `AGENTS.md`, a `CLAUDE.md`
+   that imports it with `@AGENTS.md`, `specs/` and `.decisions/`. One file serves every tool,
+   so there's nothing to copy.
+2. **Gemini CLI only:** add `AGENTS.md` to `context.fileName` (see [Gemini CLI](#gemini-cli)).
 3. **Check the commands work:** run `/verify`.
 4. **Daily loop:** `/spec <feature>` → build → `/verify` → `/merge-critique` (add `pr` to open
    the PR).
@@ -417,7 +404,7 @@ inline review.
 | Hooks do nothing on Windows | `bash` isn't on your PATH. Install Git for Windows. |
 | Stop reminder keeps repeating | Your tool doesn't send `stop_hook_active`. Use its loop limit (Cursor `loop_limit`), or set `"enforceDecisionLog": false` in `.ship-standards.json`. |
 | Agent file fails to load | Delete the `tools:` line; tool names differ between vendors. |
-| Workflow rules ignored | Your tool doesn't read `CLAUDE.md`. See [step 2](#after-install-every-tool). |
+| Workflow rules ignored | Check `AGENTS.md` has the `ship-standards` block (rerun `/init-standards`). Gemini CLI: add `AGENTS.md` to `context.fileName`. Claude Code: `CLAUDE.md` must contain `@AGENTS.md`. |
 
 ---
 

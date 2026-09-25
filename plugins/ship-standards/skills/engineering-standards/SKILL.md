@@ -1,11 +1,11 @@
 ---
 name: engineering-standards
-description: Default engineering standards for building features — structure, TypeScript/NestJS/Next.js/Python practices, testing strategy, security and AI-feature practices. Use whenever writing or changing code in a repo that uses ship-standards, when scaffolding a new project, or when the user asks "what's the right way to structure/test this". The repo's own CLAUDE.md conventions always override these defaults.
+description: Default engineering standards for building features — structure, TypeScript/NestJS/Next.js/Python practices, testing strategy, security and AI-feature practices. Use whenever writing or changing code in a repo that uses ship-standards, when scaffolding a new project, or when the user asks "what's the right way to structure/test this". The repo's own AGENTS.md / CLAUDE.md conventions always override these defaults.
 ---
 
 # Engineering Standards
 
-These are **defaults**. Precedence: user's instruction in this session > repo `CLAUDE.md`
+These are **defaults**. Precedence: user's instruction in this session > repo `AGENTS.md` / `CLAUDE.md`
 conventions > existing code patterns > this file. In an existing codebase, consistency with
 what's there beats the "ideal" pattern. If a default here would conflict, follow the repo and
 optionally note the difference in the decision log.

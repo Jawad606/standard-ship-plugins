@@ -1,6 +1,6 @@
 {
   "name": "ship-standards",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Makes coding agents follow a Spec → Context → Build → Test → Evaluate → Deploy workflow. Adopts existing repos without overwriting their conventions, and bootstraps new ones.",
   "author": {
     "name": "Muhammad Jawad Hassan",

@@ -4,7 +4,7 @@ The coding agent appends to `.decisions/<branch-name>.md` (slashes replaced by d
 chooses between real alternatives. This is what lets merge-critique give true reasons
 instead of reconstructed ones. Log only real choices — not every line.
 
-Add this instruction to the repo's `CLAUDE.md` so the coding agent does it:
+Add this instruction to the repo's `AGENTS.md` so the coding agent does it:
 
 > When you choose between two or more reasonable approaches (library, file placement,
 > data model, algorithm, pattern), append an entry to `.decisions/<branch>.md` using the
