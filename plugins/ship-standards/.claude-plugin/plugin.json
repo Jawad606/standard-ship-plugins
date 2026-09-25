@@ -1,9 +1,19 @@
 {
   "name": "ship-standards",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Makes coding agents follow a Spec → Context → Build → Test → Evaluate → Deploy workflow. Adopts existing repos without overwriting their conventions, and bootstraps new ones.",
-  "author": { "name": "Muhammad Jawad Hassan", "url": "https://jawadhassan.dev" },
+  "author": {
+    "name": "Muhammad Jawad Hassan",
+    "url": "https://jawadhassan.dev"
+  },
   "repository": "https://github.com/Jawad606/standard-ship-plugins",
   "license": "MIT",
-  "keywords": ["standards", "specs", "testing", "code-review", "ci", "agentic"]
+  "keywords": [
+    "standards",
+    "specs",
+    "testing",
+    "code-review",
+    "ci",
+    "agentic"
+  ]
 }

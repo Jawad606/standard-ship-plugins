@@ -1,0 +1,15 @@
+{
+  "version": "0.1.0",
+  "mode": "existing",
+  "baseBranch": "main",
+  "commands": {
+    "lint": "bash -n plugins/ship-standards/hooks/scripts/*.sh",
+    "typecheck": null,
+    "test": "claude plugin validate . && claude plugin validate plugins/ship-standards",
+    "e2e": null,
+    "build": null
+  },
+  "specsDir": "specs",
+  "decisionsDir": ".decisions",
+  "enforceDecisionLog": true
+}

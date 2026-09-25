@@ -22,6 +22,30 @@ optionally note the difference in the decision log.
 - Config via env with validation at startup; never hardcode secrets or URLs.
 - Keep changes inside the spec's scope. Put unrelated improvements in the report instead.
 
+## YAGNI: build for the spec, not for imagined futures
+
+Cut speculative complexity:
+
+- No interface, abstract class, factory, or strategy with only one implementation.
+- No generic helper until there are two real callers. Duplicate once; extract on the second use.
+- No config option, feature flag, or function parameter that nobody asked for, or that is
+  always passed the same value.
+- No caching, queues, events, plugin systems, or extra layers unless the spec or a
+  measurement requires them.
+- No exports, fields, or endpoints that nothing uses.
+- If something will probably be needed later, add a decision-log entry with "Revisit if:"
+  instead of building it.
+
+YAGNI does NOT apply to (these are needed now, not later):
+
+- input validation, authZ checks, error handling, logging of failures
+- tests for the acceptance criteria
+- migrations and data integrity (constraints, transactions)
+- following an existing repo pattern: if every module uses a repository layer, add one too.
+  That is consistency, not speculation.
+
+When unsure, choose the simpler version and record the tradeoff in the decision log.
+
 ## Testing strategy
 
 See `references/testing.md`. Minimum bar per change: each acceptance criterion covered by

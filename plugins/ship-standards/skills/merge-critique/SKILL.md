@@ -109,6 +109,9 @@ the reviewer should check.>
 - **Tested:** <what, and whether tests were actually run>
 - **Not tested:** <what, and why>
 
+## Speculative code (YAGNI)
+- <abstraction / option / export not needed by the spec, with file:line and caller count, or "none">
+
 ## Out of scope / unrelated changes
 - <anything in the diff not required by the task, or "none">
 

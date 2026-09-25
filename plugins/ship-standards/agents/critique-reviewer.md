@@ -43,6 +43,11 @@ Process:
 6. Check the spec: is every AC implemented and tested? Is anything in the diff out of scope?
 7. Look for: missing authZ checks, unvalidated input, N+1 queries, missing error handling,
    untested branches, hardcoded config, and inconsistency with existing repo patterns.
+8. YAGNI check. Flag speculative code: interfaces or abstractions with one implementation,
+   generic helpers with one caller, unused exports/fields/endpoints, parameters or options
+   always given the same value, and code that no acceptance criterion needs. Use Grep to
+   count real callers before flagging. Do NOT flag validation, authZ, error handling,
+   tests, or code that follows an established repo pattern.
 
 Return findings as structured notes, not the final report: files, decisions with evidence
 status, spec coverage, risks ranked by severity with file:line, and reviewer questions.

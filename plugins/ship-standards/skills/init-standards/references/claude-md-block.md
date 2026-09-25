@@ -8,7 +8,12 @@ Follow Spec → Context → Build → Test → Evaluate → Deploy for every fea
    are exempt.
 2. **Context.** Before changing unfamiliar code, read `graphify-out/GRAPH_REPORT.md` if it
    exists, and at least one existing module that does something similar. Match its patterns.
-3. **Build.** Stay inside the spec's scope. No drive-by refactors — note them instead.
+3. **Build.** Stay inside the spec's scope. No drive-by refactors; note them instead.
+   **YAGNI:** build only what the current spec needs. No abstraction until there are two
+   real callers, no config option or parameter nobody asked for, no "future-proofing" layers.
+   If something seems likely to be needed later, note it in the decision log instead of
+   building it. YAGNI never removes validation, authZ, error handling, or tests; those are
+   needed now. Existing repo patterns still apply.
 4. **Decision log.** When choosing between real alternatives (library, file placement, data
    model, pattern), append an entry to `.decisions/<branch>.md`, with `/` in the branch name replaced by `-` (format: merge-critique skill).
    Record the real reason, including "first thing that worked".
