@@ -22,7 +22,7 @@ It works in **existing** codebases (it reads and respects their conventions) and
 ## Install
 
 ```
-/plugin marketplace add jawad606/jawad-plugins
+/plugin marketplace add Jawad606/standard-ship-plugins
 /plugin install ship-standards@jawad-plugins
 ```
 
@@ -55,7 +55,7 @@ Set `enforceDecisionLog` to `false` to turn off the Stop-hook reminder in a repo
 Commit this to a project's `.claude/settings.json` so teammates get the marketplace when they trust the folder:
 
 ```json
-{ "extraKnownMarketplaces": { "jawad-plugins": { "source": { "source": "github", "repo": "jawad606/jawad-plugins" } } } }
+{ "extraKnownMarketplaces": { "jawad-plugins": { "source": { "source": "github", "repo": "Jawad606/standard-ship-plugins" } } } }
 ```
 
 ## Requirements

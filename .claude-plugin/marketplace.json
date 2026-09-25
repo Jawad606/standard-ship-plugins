@@ -1,6 +1,6 @@
 {
   "name": "jawad-plugins",
-  "owner": { "name": "Muhammad Jawad Hassan", "url": "https://github.com/jawad606" },
+  "owner": { "name": "Muhammad Jawad Hassan", "url": "https://github.com/Jawad606" },
   "metadata": { "description": "Engineering workflow plugins by Jawad Hassan", "version": "0.1.0" },
   "plugins": [
     {

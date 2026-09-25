@@ -3,7 +3,7 @@
 Claude Code plugin marketplace by [Muhammad Jawad Hassan](https://jawadhassan.dev).
 
 ```
-/plugin marketplace add jawad606/jawad-plugins
+/plugin marketplace add Jawad606/standard-ship-plugins
 /plugin install ship-standards@jawad-plugins
 ```
 
