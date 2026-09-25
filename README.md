@@ -10,3 +10,5 @@ Claude Code plugin marketplace by [Muhammad Jawad Hassan](https://jawadhassan.de
 | Plugin | Description |
 |---|---|
 | [ship-standards](plugins/ship-standards) | Spec → Context → Build → Test → Evaluate → Deploy workflow for agentic coding, for new and existing repos |
+
+Using Cursor, Copilot, Codex, Antigravity, Gemini CLI, OpenCode, Windsurf or Cline? See the [setup guide](docs/setup.md).

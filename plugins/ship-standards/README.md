@@ -38,6 +38,8 @@ Then, in any repo:
 /merge-critique pr       # fill the PR template and open the PR
 ```
 
+Other tools (Cursor, Copilot, Codex, Antigravity, Gemini CLI, OpenCode, Windsurf, Cline): see the [setup guide](../../docs/setup.md).
+
 ## Configuration — `.ship-standards.json`
 
 ```json
