@@ -59,5 +59,5 @@ Copilot can also install the Claude plugin directly: add `"chat.plugins.marketpl
 /merge-critique          # reviewer report (add `pr` to open the PR)
 ```
 
-If your tool reads `AGENTS.md` but not `CLAUDE.md` (Cursor, Antigravity, Windsurf, Cline),
-copy the `ship-standards` block from `CLAUDE.md` into `AGENTS.md` after running `/init-standards`.
+`/init-standards` writes the rules to `AGENTS.md`, which all the tools above read (Gemini CLI after one setting), and adds
+`@AGENTS.md` to `CLAUDE.md` for Claude Code. One file, every tool, nothing to copy.

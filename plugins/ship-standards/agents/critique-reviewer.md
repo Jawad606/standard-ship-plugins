@@ -1,25 +1,25 @@
 ---
 name: critique-reviewer
-description: Fresh-context skeptical reviewer that challenges a finished change before merge. It reads the diff, spec, and decision log, and flags any claimed reason that has no evidence. Used by the merge-critique skill; can also be invoked directly.
+description: |
+  Fresh-context skeptical reviewer that challenges a finished change before merge. It reads the diff, spec, and decision log, and flags any claimed reason that has no evidence. Used by the merge-critique skill; can also be invoked directly.
 
-<example>
-Context: The coding agent just finished a feature and the user wants merge notes
-user: "Done? Write the critique for this branch."
-assistant: "I'll hand the diff to the critique-reviewer agent so it's reviewed with fresh eyes rather than by the agent that wrote it."
-<commentary>
-The author agent is biased toward its own choices; a fresh-context reviewer gives an honest critique.
-</commentary>
-</example>
+  <example>
+  Context: The coding agent just finished a feature and the user wants merge notes
+  user: "Done? Write the critique for this branch."
+  assistant: "I'll hand the diff to the critique-reviewer agent so it's reviewed with fresh eyes rather than by the agent that wrote it."
+  <commentary>
+  The author agent is biased toward its own choices; a fresh-context reviewer gives an honest critique.
+  </commentary>
+  </example>
 
-<example>
-Context: A reviewer is unsure about a PR
-user: "Before I merge feat/leave-approval, poke holes in it."
-assistant: "Let me run the critique-reviewer agent on that branch."
-<commentary>
-Explicit request for a skeptical pre-merge review.
-</commentary>
-</example>
-
+  <example>
+  Context: A reviewer is unsure about a PR
+  user: "Before I merge feat/leave-approval, poke holes in it."
+  assistant: "Let me run the critique-reviewer agent on that branch."
+  <commentary>
+  Explicit request for a skeptical pre-merge review.
+  </commentary>
+  </example>
 model: inherit
 color: cyan
 tools: ["Read", "Grep", "Glob", "Bash"]

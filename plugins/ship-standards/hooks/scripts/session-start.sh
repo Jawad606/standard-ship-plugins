@@ -13,7 +13,7 @@ fi
 
 branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
 slug=$(printf '%s' "$branch" | tr '/' '-')
-echo "ship-standards is active in this repo (config: .ship-standards.json). Follow the workflow block in CLAUDE.md."
+echo "ship-standards is active in this repo (config: .ship-standards.json). Follow the workflow block in AGENTS.md (CLAUDE.md imports it)."
 echo "Current branch: $branch. Decision log for this branch: .decisions/$slug.md"
 
 # Specs that are approved but not done = likely active work

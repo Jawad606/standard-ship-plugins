@@ -38,7 +38,7 @@ Collect these before writing anything. Note in the report which ones were missin
    ticket or the original user request. Acceptance-criteria IDs (`AC-n`) anchor the report.
 3. **Decision log**: `.decisions/<branch-name>.md` if it exists (format in
    `references/decision-log.md`). This is the primary source of *why*.
-4. **Repo conventions**: `CLAUDE.md`, `CONTRIBUTING.md`, lint/format config, and 1–2
+4. **Repo conventions**: `AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING.md`, lint/format config, and 1–2
    existing modules similar to what was added (to check consistency).
 5. **Tests**: which test files were added/changed, and whether they were run
    (check the session or run them if cheap).

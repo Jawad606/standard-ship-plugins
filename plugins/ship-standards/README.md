@@ -10,7 +10,7 @@ It works in **existing** codebases (it reads and respects their conventions) and
 
 | Type | Name | What it does |
 |---|---|---|
-| Skill | `init-standards` | Detects new vs existing repo, discovers commands and conventions, writes `.ship-standards.json`, a marked block in `CLAUDE.md`, `specs/`, `.decisions/`. CI, deps and Graphify only with your yes. |
+| Skill | `init-standards` | Detects new vs existing repo, discovers commands and conventions, writes `.ship-standards.json`, a marked workflow block in `AGENTS.md` (imported by `CLAUDE.md` via `@AGENTS.md`), `specs/`, `.decisions/`. CI, deps and Graphify only with your yes. |
 | Skill | `spec` | Writes `specs/NNN-feature.md` with testable acceptance criteria (`AC-1`…). |
 | Skill | `engineering-standards` | Default build, testing, security and AI-feature rules. Repo conventions override them. |
 | Skill | `verify` | Runs lint → typecheck → test → e2e → build from the config and maps tests to ACs. |
