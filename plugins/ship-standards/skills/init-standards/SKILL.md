@@ -69,13 +69,22 @@ Always (both modes):
 2. **`AGENTS.md`** — the one place the workflow rules live (read by Cursor, Copilot, Codex,
    Antigravity, OpenCode, Windsurf, Cline). Insert the block from `references/agents-md-block.md`
    between `<!-- ship-standards:start -->` and `<!-- ship-standards:end -->` markers.
-   If the file exists, add or replace only that block; never touch the rest. Fill the
-   "Project conventions" section with what Step 2 actually found, with file examples.
-3. **`CLAUDE.md`** — Claude Code doesn't read `AGENTS.md`, so import it: make sure the file
-   contains a line `@AGENTS.md` (add it at the top if missing; create the file if absent). Don't
-   copy the block here. **Migrating** from an older setup where the block is in `CLAUDE.md`: move
-   that block into `AGENTS.md` (merging with any block already there) and delete it from
-   `CLAUDE.md`, keeping everything else in `CLAUDE.md`.
+   Create the file if absent; if it exists, add or replace only that block and never touch
+   the rest. Fill the "Project conventions" section with what Step 2 actually found, with
+   file examples.
+3. **`CLAUDE.md`** — import `AGENTS.md` so Claude Code loads it in every version (older
+   versions don't read `AGENTS.md`, and any `CLAUDE.md` without the import hides it). Make sure
+   the file has a line that is exactly `@AGENTS.md` or `@./AGENTS.md`, outside backticks or
+   code blocks (a mention inside code doesn't import). Add it at the top if missing; create the
+   file if absent. Don't copy the block here.
+
+   **Migrating** (runs in update mode too) from an older setup where the block is in `CLAUDE.md`:
+   - If `AGENTS.md` is a symlink to `CLAUDE.md`, or a text stub containing just `CLAUDE.md`
+     (a symlink checked out with `core.symlinks` off), delete it first, then create a real file.
+   - Move the block into `AGENTS.md` and delete it from `CLAUDE.md`, keeping everything else in
+     `CLAUDE.md`.
+   - If both files already have a ship-standards block and they differ, show the user a diff
+     and keep the `AGENTS.md` version unless they choose otherwise.
 4. **`specs/README.md`** and **`specs/000-template.md`** (copy from the `spec` skill's
    `references/spec-template.md`).
 5. **`.decisions/.gitkeep`**.
