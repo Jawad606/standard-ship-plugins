@@ -1,5 +1,5 @@
 {
-  "description": "ship-standards: load workflow context at session start; remind about the decision log before finishing a coding task",
+  "description": "ship-standards: load workflow context at session start; block finishing a coding task (once) until there is a decision log and a passing /verify result",
   "hooks": {
     "SessionStart": [
       {

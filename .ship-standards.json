@@ -5,11 +5,12 @@
   "commands": {
     "lint": "bash -n plugins/ship-standards/hooks/scripts/*.sh",
     "typecheck": null,
-    "test": "claude plugin validate . && claude plugin validate plugins/ship-standards",
+    "test": "claude plugin validate . && claude plugin validate plugins/ship-standards && bash tests/stop-check.test.sh",
     "e2e": null,
     "build": null
   },
   "specsDir": "specs",
   "decisionsDir": ".decisions",
-  "enforceDecisionLog": true
+  "enforceDecisionLog": true,
+  "enforceVerify": true
 }

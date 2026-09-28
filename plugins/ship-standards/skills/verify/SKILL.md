@@ -19,6 +19,15 @@ Prove the change works, rather than asserting it.
    Never skip, delete, or `.only`/`.skip` tests to get green.
 4. Find the active spec (branch name, or the most recent `approved` spec touching changed
    files) and build the AC coverage table: for each AC, the test(s) covering it, or **not covered**.
+5. Write the proof file `.decisions/<branch-slug>-verify.json` (branch name with `/` → `-`),
+   only after actually running the gates, as the last step, after your final edit:
+   ```json
+   {"result": "pass", "gates": {"lint": "pass", "typecheck": "pass", "test": "pass", "e2e": "skipped", "build": "pass"}, "at": "2026-09-27T10:00:00Z"}
+   ```
+   `result` is `pass` only if every gate that ran passed; otherwise `fail`. The Stop hook
+   blocks finishing while this file is missing, failed, or older than any changed source
+   file, so re-run `/verify` after any further edit. Never write `pass` without running the
+   gates. CI re-runs the same commands, so a false `pass` gets caught at merge.
 
 ## Output
 

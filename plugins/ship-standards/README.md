@@ -13,12 +13,12 @@ It works in **existing** codebases (it reads and respects their conventions) and
 | Skill | `init-standards` | Detects new vs existing repo, discovers commands and conventions, writes `.ship-standards.json`, a marked workflow block in `AGENTS.md` (imported by `CLAUDE.md` via `@AGENTS.md`), `specs/`, `.decisions/`. CI, deps and Graphify only with your yes. |
 | Skill | `spec` | Writes `specs/NNN-feature.md` with testable acceptance criteria (`AC-1`…). |
 | Skill | `engineering-standards` | Default build, testing, security and AI-feature rules. Repo conventions override them. |
-| Skill | `verify` | Runs lint → typecheck → test → e2e → build from the config and maps tests to ACs. |
+| Skill | `verify` | Runs lint → typecheck → test → e2e → build from the config and maps tests to ACs. Writes `.decisions/<branch>-verify.json` for the Stop hook. |
 | Skill | `merge-critique` | Evidence-backed report for whoever merges: why each file and decision, risks, what's untested. `/merge-critique pr` fills the PR template and opens the PR with `gh` (after you confirm). |
 | Template | `.github/pull_request_template.md` | Added by `/init-standards`. GitHub pre-fills every new PR with it. |
 | Agent | `critique-reviewer` | Fresh-context, read-only reviewer used by merge-critique. |
 | Hook | SessionStart | Loads branch, decision-log path and active specs; nudges `/init-standards` in uninitialised repos. |
-| Hook | Stop | If source changed on a feature branch with no decision log, asks Claude once to record decisions and verify. |
+| Hook | Stop | If source changed on a feature branch, blocks once until there's a decision log and a passing `/verify` result newer than the changes. |
 
 ## Install
 
@@ -48,11 +48,16 @@ Other tools (Cursor, Copilot, Codex, Antigravity, Gemini CLI, OpenCode, Windsurf
   "commands": { "lint": "pnpm lint", "typecheck": "pnpm typecheck", "test": "pnpm test", "e2e": "pnpm e2e", "build": "pnpm build" },
   "specsDir": "specs",
   "decisionsDir": ".decisions",
-  "enforceDecisionLog": true
+  "enforceDecisionLog": true,
+  "enforceVerify": true
 }
 ```
 
-Set `enforceDecisionLog` to `false` to turn off the Stop-hook reminder in a repo.
+The Stop hook won't let the agent finish a feature branch with changed source files until it has:
+- a decision log (`enforceDecisionLog`), and
+- a passing `/verify` result newer than every changed file (`enforceVerify`). `/verify` writes this to `.decisions/<branch>-verify.json`.
+
+It blocks once per stop. Set either key to `false` to turn that check off. The hook is a speed bump: the real gate is CI plus a required status check on the base branch, which `/init-standards` offers to set up.
 
 ## Team auto-install
 

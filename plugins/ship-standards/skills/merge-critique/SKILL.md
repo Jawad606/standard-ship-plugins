@@ -53,7 +53,8 @@ fresh context instead of the author's bias; build the report from its notes. Oth
 do the analysis yourself using the questions below.
 
 Run the `verify` skill first (or use its latest result in this session), so the Testing
-section reports what was actually run, not what should pass.
+section reports what was actually run, not what should pass. Cite `.decisions/<branch-slug>-verify.json`
+(result and time). If it's missing, failed, or older than the last change, say so in Testing.
 
 Before writing, go through the diff file by file and ask:
 

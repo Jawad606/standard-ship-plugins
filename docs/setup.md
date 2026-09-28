@@ -402,7 +402,8 @@ inline review.
 | Skill loads but can't find its template | Its `references/` folder wasn't copied. Copy the whole skill folder. |
 | Claude Code still shows the old version | Run `claude plugin update ship-standards@jawad-plugins`, then restart. `marketplace update` alone isn't enough. |
 | Hooks do nothing on Windows | `bash` isn't on your PATH. Install Git for Windows. |
-| Stop reminder keeps repeating | Your tool doesn't send `stop_hook_active`. Use its loop limit (Cursor `loop_limit`), or set `"enforceDecisionLog": false` in `.ship-standards.json`. |
+| Stop reminder keeps repeating | Your tool doesn't send `stop_hook_active`. Use its loop limit (Cursor `loop_limit`), or set `"enforceDecisionLog": false` / `"enforceVerify": false` in `.ship-standards.json`. |
+| Stop hook says "run /verify" after it passed | You edited a file after `/verify`, so the result is stale. Run `/verify` again as the last step. |
 | Agent file fails to load | Delete the `tools:` line; tool names differ between vendors. |
 | Workflow rules ignored | Check `AGENTS.md` has the `ship-standards` block (rerun `/init-standards`). Gemini CLI: add `AGENTS.md` to `context.fileName`. Claude Code: `CLAUDE.md` must contain `@AGENTS.md`. |
 

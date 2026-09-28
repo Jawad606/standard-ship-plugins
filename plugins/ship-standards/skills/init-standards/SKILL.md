@@ -43,7 +43,9 @@ Show the user a short plan before writing anything:
 - What was detected (stack, commands, conventions — 5–10 lines)
 - Files that will be **created** vs **edited**
 - Gaps found (e.g. "no e2e tests", "no typecheck script", "CI doesn't run tests")
-- Optional additions, each needing a yes: installing deps, adding CI, installing Graphify
+- **CI (recommended):** the only gate an agent can't fake. It re-runs the commands on every PR.
+  Offer it first, and say that without it nothing stops unverified code from merging.
+- Other optional additions, each needing a yes: installing deps, installing Graphify
 - If the team also uses other agents (Cursor, Codex, Gemini CLI, …), point them to the setup
   guide for per-tool hooks and the reviewer agent:
   https://github.com/Jawad606/standard-ship-plugins/blob/main/docs/setup.md
@@ -63,7 +65,8 @@ Always (both modes):
      "commands": { "lint": "pnpm lint", "typecheck": "pnpm typecheck", "test": "pnpm test", "e2e": null, "build": "pnpm build" },
      "specsDir": "specs",
      "decisionsDir": ".decisions",
-     "enforceDecisionLog": true
+     "enforceDecisionLog": true,
+     "enforceVerify": true
    }
    ```
 2. **`AGENTS.md`** — the one place the workflow rules live (read by Cursor, Copilot, Codex,
@@ -87,7 +90,8 @@ Always (both modes):
      and keep the `AGENTS.md` version unless they choose otherwise.
 4. **`specs/README.md`** and **`specs/000-template.md`** (copy from the `spec` skill's
    `references/spec-template.md`).
-5. **`.decisions/.gitkeep`**.
+5. **`.decisions/.gitkeep`**, and add `.decisions/*-verify.json` to `.gitignore` (the local
+   proof file `/verify` writes; the Stop hook reads it, CI doesn't need it).
 6. **PR template**: `.github/pull_request_template.md` from `references/pull_request_template.md`.
    GitHub fills every new PR body with it automatically (web UI and interactive `gh pr create`).
    If the repo already has a template (`.github/pull_request_template.md`,
@@ -98,6 +102,13 @@ Only if the user agreed:
 
 7. **CI** — adapt `references/ci-workflow.yml` to the detected commands and package manager.
    In existing repos with CI, propose a diff to the current workflow instead of a new file.
+   Then offer (separate yes) to **require** the check on the base branch, since CI that
+   isn't required only warns. On a yes, with `gh` authenticated and admin rights:
+   `gh api -X PUT repos/<owner>/<repo>/branches/<base>/protection --input -` with
+   `{"required_status_checks":{"strict":true,"contexts":["<job name>"]},"enforce_admins":false,"required_pull_request_reviews":null,"restrictions":null}`.
+   This replaces any existing protection rules, so run `gh api repos/<owner>/<repo>/branches/<base>/protection`
+   first. If rules exist, or `gh` fails, give the manual path instead: *Settings → Branches →
+   Add rule → Require status checks → select the CI job*.
 8. **Missing test tooling** — New mode defaults: Vitest (TS libs/Next.js), Jest (NestJS default),
    Pytest (Python), Playwright (e2e). Existing mode: fill gaps with whatever the repo already
    uses; don't add Vitest to a Jest repo.

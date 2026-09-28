@@ -18,7 +18,7 @@ Follow Spec → Context → Build → Test → Evaluate → Deploy for every fea
 
 ## Project commands
 <!-- filled from .ship-standards.json -->
-- lint: `bash -n plugins/ship-standards/hooks/scripts/*.sh`  · typecheck: none  · test: `claude plugin validate . && claude plugin validate plugins/ship-standards`  · e2e: none  · build: none
+- lint: `bash -n plugins/ship-standards/hooks/scripts/*.sh`  · typecheck: none  · test: `claude plugin validate . && claude plugin validate plugins/ship-standards && bash tests/stop-check.test.sh`  · e2e: none  · build: none
 
 ## Project conventions
 <!-- filled by init-standards from the actual codebase, with file examples -->
@@ -27,5 +27,5 @@ Follow Spec → Context → Build → Test → Evaluate → Deploy for every fea
 - Frontmatter: skills and agents need valid YAML frontmatter (`name`, `description`). Multi-line agent descriptions with `<example>` blocks must use a `description: |` block scalar (see `agents/critique-reviewer.md`) — `claude plugin validate` catches this.
 - Hooks: plain bash, no dependencies beyond git/grep/sed/awk (no `jq`); exit 0 silently when not applicable; always respect `stop_hook_active` in Stop hooks (see `hooks/scripts/stop-check.sh`).
 - Versioning: keep `version` in sync across `marketplace.json` (metadata + plugin entry) and `plugin.json`.
-- Validation: no DB, no runtime code — correctness is `claude plugin validate` + `bash -n`.
+- Validation: no DB, no runtime code — correctness is `claude plugin validate` + `bash -n`, plus `tests/*.test.sh` (throwaway git repo, plain asserts) for hook logic.
 <!-- ship-standards:end -->
